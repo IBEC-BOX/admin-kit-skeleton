@@ -16,6 +16,6 @@ return [
         'created_at' => 'Создан',
         'updated_at' => 'Обновлен',
     ],
-    
+
     'empty' => 'Пусто.',
 ];
