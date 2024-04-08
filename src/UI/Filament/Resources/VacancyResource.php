@@ -31,10 +31,10 @@ class VacancyResource extends Resource
                 TranslatableTabs::make(fn ($locale) => Forms\Components\Tabs\Tab::make($locale)->schema([
                     Forms\Components\TextInput::make('title.'.$locale)
                         ->label(__('admin-kit-vacancy::vacancy.resource.title'))
-                        ->required(),
+                        ->required($locale === app()->getLocale()),
                     Forms\Components\TextInput::make('subtitle.'.$locale)
                         ->label(__('admin-kit-vacancy::vacancy.resource.subtitle'))
-                        ->required(),
+                        ->required($locale === app()->getLocale()),
                     Forms\Components\Section::make(__('admin-kit-vacancy::vacancy.resource.action_button'))->schema([
                         Forms\Components\TextInput::make('action_title.'.$locale)
                             ->label(__('admin-kit-vacancy::vacancy.resource.title')),
@@ -82,8 +82,7 @@ class VacancyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListVacancy::route('/'),
-            'create' => Pages\CreateVacancy::route('/create'),
+            'index' => Pages\CreateVacancy::route('/'),
             'edit' => Pages\EditVacancy::route('/{record}/edit'),
         ];
     }
@@ -104,7 +103,7 @@ class VacancyResource extends Resource
             ->first();
 
         return $vacancy
-            ? route('filament.admin-kit.resources.vacancies.edit', $vacancy)
-            : route('filament.admin-kit.resources.vacancies.create');
+            ? self::getUrl('edit', ['record' => $vacancy])
+            : self::getUrl();
     }
 }

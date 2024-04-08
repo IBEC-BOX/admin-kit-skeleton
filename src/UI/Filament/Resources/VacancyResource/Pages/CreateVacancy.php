@@ -9,15 +9,5 @@ class CreateVacancy extends CreateRecord
 {
     protected static string $resource = VacancyResource::class;
 
-    protected function getActions(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    protected function getRedirectUrl(): string
-    {
-        return VacancyResource::getUrl();
-    }
+    protected static bool $canCreateAnother = false;
 }

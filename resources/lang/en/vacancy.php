@@ -11,8 +11,11 @@ return [
         'image' => 'Image',
         'action_button' => 'Action button',
         'link' => 'Link',
+        'gallery' => 'Gallery',
 
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
     ],
+
+    'empty' => 'Empty.',
 ];
