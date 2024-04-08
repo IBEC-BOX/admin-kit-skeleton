@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class VacancyGalleryRelationManager extends RelationManager
 {
@@ -27,7 +28,7 @@ class VacancyGalleryRelationManager extends RelationManager
                 TranslatableTabs::make(fn ($locale) => Tab::make($locale)->schema([
                     Forms\Components\TextInput::make('title.'.$locale)
                         ->label(__('admin-kit-vacancy::vacancy.resource.title'))
-                        ->required(),
+                        ->required($locale === app()->getLocale()),
                 ]))->columnSpan(2),
             ]);
     }
@@ -43,9 +44,6 @@ class VacancyGalleryRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('title')
                     ->label(__('admin-kit-vacancy::vacancy.resource.title')),
             ])
-            ->filters([
-                //
-            ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])
@@ -57,6 +55,23 @@ class VacancyGalleryRelationManager extends RelationManager
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->emptyStateHeading(__('admin-kit-vacancy::vacancy.empty'))
+            ->emptyStateDescription('');
+    }
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('admin-kit-vacancy::vacancy.resource.gallery');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin-kit-vacancy::vacancy.resource.gallery');
+    }
+
+    protected static function getPluralModelLabel(): string
+    {
+        return __('admin-kit-vacancy::vacancy.resource.gallery');
     }
 }
