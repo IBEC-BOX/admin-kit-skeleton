@@ -1,6 +1,7 @@
 {
     "name": "ibecsystems/admin-kit-vacancy",
     "description": "Vacancy package for AdminKit",
+    "type": "admin-kit-package",
     "keywords": [
         "ibec-box",
         "laravel",
